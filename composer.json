@@ -2,6 +2,7 @@
   "name": "techdivision/scheduler",
   "type": "typo3-flow-package",
   "description": "a task scheduler for Neos!",
+  "license": "GPL-3.0+",
   "homepage": "https://github.com/techdivision/TechDivision.Scheduler",
   "authors": [
     {
