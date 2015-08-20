@@ -1,0 +1,72 @@
+<f:layout name="BackendSubModule" />
+
+<f:section name="content">
+    <f:for each="{views}" as="view">
+        <f:link.action controller="{view.controller}" action="{view.action}" class="neos-button{f:if(condition: '{view.action} == {action}', then: ' neos-active')}">{view.name}</f:link.action>
+    </f:for>
+    <br/><br/><br/>
+    <f:for each="{availableViews}" as="availableView">
+        <f:link.action controller="{availableView.view}" action="index" class="neos-button{f:if(condition: '{availableView.type} == {type}', then: ' neos-active')}">{availableView.title}</f:link.action>
+    </f:for>
+    <table class="neos-table">
+        <thead>
+        <tr>
+            <th>Cron</th>
+            <th>Created</th>
+            <th>Started</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+        <f:for each="{tasks}" as="task">
+            <tr>
+                <td>{task.cron.name}</td>
+                <td><f:format.date format="d.m.Y - H:i:s">{task.createTime}</f:format.date></td>
+                <td>
+                <f:if condition="{task.startTime}">
+                    <f:then>
+                <f:format.date format="d.m.Y - H:i:s">{task.startTime}</f:format.date>
+                    </f:then>
+                </f:if>
+                </td>
+                <td>
+                    <f:if condition="{task.status} == 'running'">
+                        <f:then>
+                            <span class="neos-badge neos-badge-success">{task.status}</span>
+                        </f:then>
+                        <f:else>
+                            <span class="neos-badge neos-badge-info">{task.status}</span>
+                        </f:else>
+                    </f:if>
+                </td>
+                <td class="neos-action">
+                    <div class="neos-pull-right">
+                        <f:if condition="{task.status} != 'running'">
+                        <button class="neos-button neos-button-danger" title="Click to skip" data-toggle="modal" href="#{task.cron.name}">
+                            <i class="icon-trash icon-white"></i>
+                        </button>
+                        <div class="neos-hide" id="{task.cron.name}">
+                            <div class="neos-modal">
+                                <div class="neos-modal-header">
+                                    <button type="button" class="neos-close neos-button" data-dismiss="modal"></button>
+                                    <div class="neos-header">Do you really want to skip this task? This action cannot be undone.</div>
+                                </div>
+                                <div class="neos-modal-footer">
+                                    <a href="#" class="neos-button" data-dismiss="modal">Cancel</a>
+                                    <f:form action="skip" arguments="{task: task}" class="neos-inline">
+                                        <button class="neos-button neos-button-danger" title="Skip this task">
+                                            Yes, skip the task
+                                        </button>
+                                    </f:form>
+                                </div>
+                            </div>
+                            <div class="neos-modal-backdrop neos-in"></div>
+                        </div>
+                        </f:if>
+                    </div>
+                </td>
+            </tr>
+        </f:for>
+        </tbody>
+    </table>
+</f:section>
+

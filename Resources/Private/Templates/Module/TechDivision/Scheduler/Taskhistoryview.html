@@ -1,0 +1,64 @@
+<f:layout name="BackendSubModule" />
+
+<f:section name="content">
+    <f:for each="{views}" as="view">
+        <f:link.action controller="{view.controller}" action="{view.action}" class="neos-button{f:if(condition: '{view.action} == {action}', then: ' neos-active')}">{view.name}</f:link.action>
+    </f:for>
+    <br/><br/><br/>
+    <f:for each="{availableViews}" as="availableView">
+        <f:link.action controller="{availableView.view}" action="index" class="neos-button{f:if(condition: '{availableView.type} == {type}', then: ' neos-active')}">{availableView.title}</f:link.action>
+    </f:for>
+
+    <f:widget.paginate objects="{tasks}" as="paginatedTasks" configuration="{itemsPerPage: 20, insertAbove: 1, insertBelow: 0, maximumNumberOfLinks: 10}">
+        <br /><br />
+        <table class="neos-table">
+            <thead>
+            <tr>
+                <th>CronCommand</th>
+                <th>Task Name</th>
+                <th>Created</th>
+                <th>Started</th>
+                <th>Finished</th>
+                <th>Status</th>
+            </tr>
+            <f:for each="{paginatedTasks}" as="task">
+                <tr>
+                    <td>{task.cronCommand}</td>
+                    <td>{task.taskName}</td>
+                    <td><f:format.date format="d.m.Y - H:i:s">{task.createTime}</f:format.date></td>
+                    <td><f:format.date format="d.m.Y - H:i:s">{task.startTime}</f:format.date></td>
+                    <td><f:format.date format="d.m.Y - H:i:s">{task.endTime}</f:format.date></td>
+                    <td>
+                        <f:if condition="{task.status} == 'success'">
+                            <f:then>
+                                <span class="neos-badge neos-badge-success">{task.status}</span>
+                            </f:then>
+                        </f:if>
+                        <f:if  condition="{task.status} == 'aborted'">
+                            <f:then>
+                                <span class="neos-badge neos-badge-important">{task.status}</span>
+                            </f:then>
+                        </f:if>
+                        <f:if  condition="{task.status} == 'unknown'">
+                            <f:then>
+                                <span class="neos-badge neos-badge-important">{task.status}</span>
+                            </f:then>
+                        </f:if>
+                        <f:if  condition="{task.status} == 'skipped'">
+                            <f:then>
+                                <span class="neos-badge neos-badge-info">{task.status}</span>
+                            </f:then>
+                        </f:if>
+                        <f:if  condition="{task.status} == 'failure'">
+                            <f:then>
+                                <span class="neos-badge neos-badge-warning">{task.status}</span>
+                            </f:then>
+                        </f:if>
+                    </td>
+                </tr>
+            </f:for>
+            </tbody>
+        </table>
+    </f:widget.paginate>
+</f:section>
+

@@ -1,0 +1,37 @@
+{
+  "name": "techdivision/scheduler",
+  "type": "typo3-flow-package",
+  "description": "a task scheduler for Neos!",
+  "homepage": "https://github.com/techdivision/TechDivision.Scheduler",
+  "authors": [
+    {
+      "name": "Philipp Dittert",
+      "email": "pd@techdivision.com",
+      "homepage": "https://www.techdivision.com"
+    }
+  ],
+  "require": {
+    "typo3/neos": "1.2.*",
+    "mtdowling/cron-expression": "1.0.*",
+    "techdivision/modulebase": "1.0.*"
+  },
+  "require-dev": {
+    "phing/phing": "*",
+    "mikey179/vfsStream": "*",
+    "php": ">=5.4.0",
+    "phpmd/phpmd": "2.1.*",
+    "phploc/phploc": "2.0.*",
+    "pdepend/pdepend": "2.0.*",
+    "sebastian/phpcpd": "2.0.*",
+    "squizlabs/php_codesniffer": "2.*"
+  },
+  "autoload": {
+    "psr-0": {
+      "TechDivision\\Scheduler": "Classes"
+    }
+  },
+  "support": {
+    "issues": "https://github.com/techdivision/TechDivision.Scheduler/issues",
+    "source": "https://github.com/techdivision/TechDivision.Scheduler"
+  }
+}

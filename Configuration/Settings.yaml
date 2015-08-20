@@ -1,0 +1,11 @@
+TYPO3:
+  Neos:
+    modules:
+      techdivision:
+        submodules:
+          scheduler:
+            label: 'Scheduler Management'
+            controller: '\TechDivision\Scheduler\Controller\Module\TechDivision\SchedulerController'
+            description: 'Scheduler Management'
+            icon: 'icon-tasks'
+            resource: 'TechDivision_Scheduler_Controller_Module_TechDivision_Scheduler'

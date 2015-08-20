@@ -1,0 +1,51 @@
+<f:layout name="BackendSubModule" />
+
+<f:section name="subtitle">
+    <h2>Cron: {cron.name}</h2>
+</f:section>
+
+<f:section name="content">
+    <f:form action="update" name="cron" object="{cron}" class="sites sites-edit">
+        <fieldset>
+            <div class="neos-row-fluid">
+                <fieldset class="neos-span5">
+                    <legend>Cron</legend>
+                    <div class="neos-control-group">
+                        <label class="neos-control-label" for="name">Name</label>
+                        <div class="neos-controls">
+                            <f:form.textfield property="name" id="name" value="{cron.name}" class="neos-span12" required="true" />
+                        </div>
+                    </div>
+                    <div class="neos-control-group">
+                        <f:if condition="{cronCommands -> f:count()} > 0">
+                            <f:then>
+                                <div class="neos-control-group">
+                                    <label class="neos-control-label" for="cronCommand">Select a cron command</label>
+                                    <div class="neos-controls neos-select">
+                                        <f:form.select property="cronCommand" options="{cronCommands}" optionLabelField="cronCommand" optionValueField="cronCommand" id="cronCommand" class="neos-span12" />
+                                    </div>
+                                </div>
+                            </f:then>
+                            <f:else>
+                                <p>No cron commands are available.</p>
+                            </f:else>
+                        </f:if>
+                    </div>
+                    <div class="neos-control-group">
+                        <label class="neos-control-label" for="parameter">Parameter</label>
+                        <div class="neos-controls">
+                            <f:form.textfield property="parameter" id="parameter" value="{cron.parameter}" class="neos-span12" required="false" />
+                        </div>
+                    </div>
+                    <div class="neos-control-group">
+                        <label class="neos-control-label" for="cronExpression">Cron Expression</label>
+                        <div class="neos-controls">
+                            <f:form.textfield property="cronExpression" id="cronExpression" value="{cron.cronExpression}" class="neos-span12" required="true" />
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <f:form.submit value="Save" class="neos-button neos-button-primary" />
+        </fieldset>
+    </f:form>
+</f:section>

@@ -1,0 +1,8 @@
+resources:
+  methods:
+    TechDivision_Scheduler_Controller_Module_TechDivision_Scheduler: 'method(TechDivision\Scheduler\Controller\Module\TechDivision\SchedulerController->(index|new|create|edit|update|delete|disableCron|enableCron|taskview|taskhistoryview|skipTask)Action())'
+
+acls:
+  'TYPO3.TYPO3CR:Administrator':
+    methods:
+      TechDivision_Scheduler_Controller_Module_TechDivision_Scheduler: GRANT
